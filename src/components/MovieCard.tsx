@@ -1,9 +1,8 @@
 import { Card } from "antd";
 import React from "react";
-import { apiKey } from "../constants";
 import { IMovieCard } from "../types/movieCard";
 
-const MovieCard: React.FC<IMovieCard> = ({ poster_path, title, overview }) => {
+const MovieCard = ({ poster_path, title, overview }: IMovieCard) => {
   return (
     <Card
       hoverable
