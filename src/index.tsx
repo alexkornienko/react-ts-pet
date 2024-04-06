@@ -4,7 +4,9 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./app/App";
+import MovieLayout from "./components/MovieLayout";
 import { setupStore } from "./store/store";
+import { itemsNavigate } from "./utils/navigateItems";
 
 const store = setupStore();
 
@@ -15,7 +17,9 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <MovieLayout items={itemsNavigate}>
+          <App />
+        </MovieLayout>
       </BrowserRouter>
     </React.StrictMode>
   </Provider>

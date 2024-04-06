@@ -1,5 +1,7 @@
 import React from "react";
 import { Layout, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
+import type { MenuProps } from "antd";
 
 import { IMovieNavigation } from "../types/movieNavigation";
 
@@ -7,16 +9,22 @@ const MovieLayout: React.FC<{
   items: IMovieNavigation[];
   children: React.ReactNode;
 }> = ({ items, children }) => {
+  const navigate = useNavigate();
+
+  const handleChangeMenuItem: MenuProps["onClick"] = ({ key }) => navigate(key);
+
   return (
-    <Layout>
-      <Layout.Header style={{ display: "flex", alignItems: "center" }}>
-        <div className="demo-logo" />
+    <Layout style={{ minHeight: "100vh" }}>
+      <Layout.Header
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
         <Menu
+          onClick={handleChangeMenuItem}
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["2"]}
           items={items}
-          style={{ flex: 1, minWidth: 0 }}
+          style={{ minWidth: 0 }}
         />
       </Layout.Header>
       <Layout.Content style={{ padding: "0 48px" }}>{children}</Layout.Content>
