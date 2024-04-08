@@ -13,6 +13,7 @@ export interface IMovieCard {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  onClick: () => void;
 }
 
 export interface IMoviesResponse {
