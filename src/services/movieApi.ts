@@ -12,7 +12,7 @@ export const moviesApi = createApi({
   endpoints: (builder) => ({
     getMovies: builder.query<IMoviesResponse, void>({
       query: () =>
-        `discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc`,
+        `discover/movie?api_key=${apiKey}&language=ru-RU&sort_by=popularity.desc`,
     }),
   }),
 });
@@ -25,7 +25,7 @@ export const moviePageApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
     getMoviePage: builder.query<IMoviePageResponse, string>({
-      query: (movieId) => `movie/${movieId}?api_key=${apiKey}`,
+      query: (movieId) => `movie/${movieId}?api_key=${apiKey}&language=ru-RU`,
     }),
   }),
 });
