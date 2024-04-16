@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
 import { IMovieNavigation } from "../types/movieNavigation";
+import SearchPanel from "./SearchPanel";
 
 const MovieLayout: React.FC<{
   items: IMovieNavigation[];
@@ -18,6 +19,7 @@ const MovieLayout: React.FC<{
       <Layout.Header
         style={{ display: "flex", justifyContent: "space-between" }}
       >
+        <SearchPanel />
         <Menu
           onClick={handleChangeMenuItem}
           theme="dark"
