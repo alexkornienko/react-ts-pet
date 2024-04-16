@@ -5,7 +5,6 @@ import {
   Dropdown,
   Flex,
   Layout,
-  Rate,
   Row,
   Space,
   Typography,
@@ -82,7 +81,20 @@ const MoviePage = () => {
         </Col>
         <Col span={4}>
           <Space direction="vertical">
-            <Rate allowHalf count={10} value={data?.vote_average} />
+            <Typography.Title
+              style={{
+                marginTop: "8px",
+                fontWeight: 900,
+                color:
+                  data?.vote_average && data?.vote_average >= 7.1
+                    ? "green"
+                    : data?.vote_average && data?.vote_average >= 5.1
+                    ? "orange"
+                    : "red",
+              }}
+            >
+              {data?.vote_average.toFixed(1)}
+            </Typography.Title>
             {data?.overview}
           </Space>
         </Col>
