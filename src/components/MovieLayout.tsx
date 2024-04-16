@@ -27,7 +27,7 @@ const MovieLayout: React.FC<{
           style={{ minWidth: 0 }}
         />
       </Layout.Header>
-      <Layout.Content style={{ padding: "0 48px" }}>{children}</Layout.Content>
+      <Layout.Content style={{ padding: "0 7rem" }}>{children}</Layout.Content>
 
       {/* TODO: create footer */}
       <Layout.Footer style={{ textAlign: "center" }}>
