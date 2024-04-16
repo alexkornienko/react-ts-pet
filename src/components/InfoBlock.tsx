@@ -59,8 +59,8 @@ const InfoBlock = ({
         data={genres?.map((genry) => genry.name).join(", ")}
       />
       <InfoItem title="Слоган" data={tagline} />
-      <InfoItem title="Бюджет" data={budget} />
-      <InfoItem title="Сборы" data={revenue} />
+      <InfoItem title="Бюджет" data={`${budget} $`} />
+      <InfoItem title="Сборы" data={`${revenue} $`} />
       <InfoItem
         title="Премьера в мире"
         data={release_date && format(new Date(release_date), "dd.MM.yyyy")}
