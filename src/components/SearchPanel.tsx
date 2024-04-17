@@ -1,71 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, AutoComplete } from "antd";
-import {
-  useGetSerchedListQuery,
-  useLazyGetSerchedListQuery,
-} from "../services/searchApi";
+import { useLazyGetSerchedListQuery } from "../services/searchApi";
 import { ISearchItem } from "../types/searchList";
+import { useNavigate } from "react-router-dom";
+import { useDebouncedCallback } from "use-debounce";
 
 const { Search } = Input;
 
-// Примерный список фильмов (можно заменить на реальные данные)
-const mockOptions = [
-  { value: "Звездные войны" },
-  { value: "Властелин колец" },
-  { value: "Гарри Поттер" },
-];
-
-const getRandomInt = (max: number, min = 0) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const searchResult = (query: string) =>
-  new Array(getRandomInt(5))
-    .join(".")
-    .split(".")
-    .map((_, idx) => {
-      const category = `${query}${idx}`;
-      return {
-        value: category,
-        label: (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <span>
-              Found {query} on{" "}
-              <a
-                href={`https://s.taobao.com/search?q=${query}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {category}
-              </a>
-            </span>
-            <span>{getRandomInt(200, 100)} results</span>
-          </div>
-        ),
-      };
-    });
+interface IOption extends ISearchItem {
+  value: string;
+  key: string;
+}
 
 const SearchPanel: React.FC = () => {
-  const [options, setOptions] = useState<{ value: string }[]>([]);
-  // const {data} = useGetSerchedListQuery()
+  const navigate = useNavigate();
+
   const [getSearchedList, { data }] = useLazyGetSerchedListQuery();
 
-  // const handleSearch = (value: string) => {
-  //   setOptions(value ? searchResult(value) : []);
-  // };
-  const handleSearch = (value: string) => {
+  const handleSearch = useDebouncedCallback((value: string) => {
     if (value) {
       getSearchedList(value);
     }
+  }, 700);
+
+  const onSelect = (value: string, option: IOption | {}) => {
+    if ("id" in option) {
+      navigate(`/movies/${option.id}`);
+    }
   };
 
-  const onSelect = (value: string) => {
-    console.log("onSelect", value);
-  };
+  const handleGetSearchedList = () => console.log(data); // TODO: добавить лист найденых фильмов
 
   return (
     <AutoComplete
@@ -73,14 +37,23 @@ const SearchPanel: React.FC = () => {
       style={{ width: 300, margin: "14px 0" }}
       options={
         data?.results
-          ? data?.results.map((item: ISearchItem) => ({ value: item.title }))
+          ? data?.results.map((item: ISearchItem) => ({
+              value: item.title,
+              key: item.id,
+              ...item,
+            }))
           : []
       }
       onSelect={onSelect}
       onSearch={handleSearch}
-      size="large"
     >
-      <Search placeholder="Поиск" enterButton size="large" />
+      <Search
+        placeholder="Поиск"
+        enterButton
+        size="large"
+        allowClear
+        onSearch={handleGetSearchedList}
+      />
     </AutoComplete>
   );
 };
