@@ -1,14 +1,52 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
-import { IMovieNavigation } from "../types/movieNavigation";
+import {
+  DesktopOutlined,
+  HomeOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
+
+interface IMovieNavigation {
+  label: string;
+  key: string;
+  disabled?: boolean;
+  icon?: ReactNode;
+}
+
+export const itemsNavigate: IMovieNavigation[] = [
+  {
+    label: "Главная",
+    key: "/",
+    disabled: false,
+    icon: <HomeOutlined />,
+  },
+  {
+    label: "Фильмы",
+    key: "/movies",
+    disabled: false,
+    icon: <VideoCameraOutlined />,
+  },
+  {
+    label: "Сериалы",
+    key: "/serials",
+    disabled: false,
+    icon: <DesktopOutlined />,
+  },
+  {
+    label: "Профиль",
+    key: "/profile",
+    disabled: false,
+    icon: <UserOutlined />,
+  },
+];
 
 const MovieLayout: React.FC<{
-  items: IMovieNavigation[];
   children: React.ReactNode;
-}> = ({ items, children }) => {
+}> = ({ children }) => {
   const navigate = useNavigate();
 
   const handleChangeMenuItem: MenuProps["onClick"] = ({ key }) => navigate(key);
@@ -23,7 +61,7 @@ const MovieLayout: React.FC<{
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["2"]}
-          items={items}
+          items={itemsNavigate}
           style={{ minWidth: 0 }}
         />
       </Layout.Header>
