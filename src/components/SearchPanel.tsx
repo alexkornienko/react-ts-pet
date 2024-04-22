@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, AutoComplete } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 
 import { useLazyGetSerchedListQuery } from "../services/searchApi";
-import { ISearchItem } from "../types/searchList";
+import { IMovieCard } from "../types/movieCard";
 
 const { Search } = Input;
 
-interface IOption extends ISearchItem {
+interface IOption extends IMovieCard {
   value: string;
   key: string;
 }
 
 const SearchPanel: React.FC = () => {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [getSearchedList, { data }] = useLazyGetSerchedListQuery();
 
@@ -30,7 +31,12 @@ const SearchPanel: React.FC = () => {
     }
   };
 
-  const handleGetSearchedList = () => console.log(data); // TODO: добавить лист найденых фильмов
+  const handleGetSearchedList = (value: string) => {
+    if (value) {
+      navigate(`/search_movies/${value}`);
+    }
+    setMenuOpen(false);
+  };
 
   return (
     <AutoComplete
@@ -38,7 +44,7 @@ const SearchPanel: React.FC = () => {
       style={{ width: 300, margin: "14px 0" }}
       options={
         data?.results
-          ? data?.results.map((item: ISearchItem) => ({
+          ? data?.results.map((item: IMovieCard) => ({
               value: item.title,
               key: item.id,
               ...item,
@@ -47,6 +53,8 @@ const SearchPanel: React.FC = () => {
       }
       onSelect={onSelect}
       onSearch={handleSearch}
+      open={menuOpen}
+      onDropdownVisibleChange={(open) => setMenuOpen(open)}
     >
       <Search
         placeholder="Поиск"
