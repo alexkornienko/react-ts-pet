@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Col, Empty, Flex, Row, Spin, Typography } from "antd";
 
-import { IMovieCard, IMoviesResponse } from "../types/movieCard";
-import MovieCard from "./MovieCard";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
+
+import { IMovieCard, IMoviesResponse } from "../types/movieCard";
+import MovieCard from "./MovieCard";
 
 interface MovieListWrapperProps {
   isLoading?: boolean;

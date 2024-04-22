@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
+
 import MovieListWrapper from "./MovieListWrapper";
 import { useGetSerchedListQuery } from "../services/searchApi";
-import { useParams } from "react-router-dom";
 
 const MovieListSearched = () => {
   let { query } = useParams();
