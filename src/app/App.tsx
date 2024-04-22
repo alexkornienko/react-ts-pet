@@ -1,7 +1,6 @@
 import { Typography } from "antd";
 import React from "react";
 import { Route, Routes } from "react-router";
-import { Link } from "react-router-dom";
 import MovieList from "../components/MovieList";
 
 function App() {
