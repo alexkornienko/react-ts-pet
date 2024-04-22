@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app/App";
 import MovieLayout from "./components/MovieLayout";
 import { setupStore } from "./store/store";
-import { itemsNavigate } from "./utils/navigateItems";
 
 const store = setupStore();
 
@@ -17,7 +16,7 @@ root.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <MovieLayout items={itemsNavigate}>
+        <MovieLayout>
           <App />
         </MovieLayout>
       </BrowserRouter>
