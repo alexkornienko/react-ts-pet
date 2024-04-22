@@ -1,9 +1,10 @@
 import React from "react";
 import { Input, AutoComplete } from "antd";
-import { useLazyGetSerchedListQuery } from "../services/searchApi";
-import { ISearchItem } from "../types/searchList";
 import { useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
+
+import { useLazyGetSerchedListQuery } from "../services/searchApi";
+import { ISearchItem } from "../types/searchList";
 
 const { Search } = Input;
 
