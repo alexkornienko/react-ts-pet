@@ -1,21 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { Col, Empty, Flex, Row, Spin, Typography } from "antd";
 
-import { useGetMoviesQuery } from "../services/movieApi";
-import { IMovieCard } from "../types/movieCard";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+
+import { IMovieCard, IMoviesResponse } from "../types/movieCard";
 import MovieCard from "./MovieCard";
 
-const MovieList = () => {
-  const { data, isLoading, error } = useGetMoviesQuery();
+interface MovieListWrapperProps {
+  isLoading?: boolean;
+  error?: FetchBaseQueryError | SerializedError | undefined;
+  data?: IMoviesResponse;
+}
+
+const MovieListWrapper = ({
+  data,
+  isLoading,
+  error,
+}: MovieListWrapperProps) => {
   const navigate = useNavigate();
 
   const handleGetMoviePage = (id: number) => {
-    navigate(`${id}`);
+    navigate(`/movies/${id}`);
   };
 
   return (
     <Flex gap="middle" align="center" vertical>
-      <Typography.Title>Movies</Typography.Title>
+      <Typography.Title>Фильмы</Typography.Title>
       {error && (
         <>
           <Typography.Title>Ошибка загрузки</Typography.Title>
@@ -43,4 +54,4 @@ const MovieList = () => {
   );
 };
 
-export default MovieList;
+export default MovieListWrapper;
