@@ -25,8 +25,7 @@ const MovieListWrapper = ({
   };
 
   return (
-    <Flex gap="middle" align="center" vertical>
-      <Typography.Title>Фильмы</Typography.Title>
+    <Flex gap="middle" align="center" vertical style={{ paddingTop: "2rem" }}>
       {error && (
         <>
           <Typography.Title>Ошибка загрузки</Typography.Title>
