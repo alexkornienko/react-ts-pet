@@ -5,11 +5,12 @@ import { Route, Routes } from "react-router";
 import MovieList from "../components/MovieList";
 import MoviePage from "../components/MoviePage";
 import MovieListSearched from "../components/MovieListSearched";
+import HomePage from "../components/HomePage/HomePage";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Typography.Title>Home</Typography.Title>} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/movies" element={<MovieList />} />
       <Route path="/movies/:id" element={<MoviePage />} />
       <Route path="/search_movies/:query" element={<MovieListSearched />} />

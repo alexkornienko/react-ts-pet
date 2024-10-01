@@ -17,8 +17,9 @@ import {
   PlusSquareOutlined,
 } from "@ant-design/icons";
 
-import { useGetMoviePageQuery } from "../services/movieApi";
+import { baseImageUrl, useGetMoviePageQuery } from "../services/movieApi";
 import InfoBlock from "./InfoBlock";
+import Average from "../common/Average";
 
 const items = [
   {
@@ -45,7 +46,7 @@ const MoviePage = () => {
             <img
               style={{ width: "100%" }}
               alt="example"
-              src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
+              src={`${baseImageUrl}${data?.poster_path}`}
             />
           </Flex>
         </Col>
@@ -81,20 +82,7 @@ const MoviePage = () => {
         </Col>
         <Col span={4}>
           <Space direction="vertical">
-            <Typography.Title
-              style={{
-                marginTop: "8px",
-                fontWeight: 900,
-                color:
-                  data?.vote_average && data?.vote_average >= 7.1
-                    ? "green"
-                    : data?.vote_average && data?.vote_average >= 5.1
-                    ? "orange"
-                    : "red",
-              }}
-            >
-              {data?.vote_average.toFixed(1)}
-            </Typography.Title>
+            <Average average={data?.vote_average} />
             {data?.overview}
           </Space>
         </Col>

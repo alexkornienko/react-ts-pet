@@ -14,6 +14,12 @@ export interface IMovieCard {
   vote_average: number;
   vote_count: number;
   onClick: () => void;
+  sizeSmall?: boolean;
+}
+
+export interface IDatesResponse {
+  maximum: string;
+  minimum: string;
 }
 
 export interface IMoviesResponse {
@@ -22,3 +28,7 @@ export interface IMoviesResponse {
   total_pages: number;
   total_results: number;
 }
+
+export interface IMoviesResponseWithDates
+  extends IDatesResponse,
+    IMoviesResponse {}
