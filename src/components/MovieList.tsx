@@ -1,10 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { Col, Empty, Flex, Row, Spin, Typography } from "antd";
+
 import { useGetMoviesQuery } from "../services/movieApi";
 import { IMovieCard } from "../types/movieCard";
 import MovieCard from "./MovieCard";
 
 const MovieList = () => {
   const { data, isLoading, error } = useGetMoviesQuery();
+  const navigate = useNavigate();
+
+  const handleGetMoviePage = (id: number) => {
+    navigate(`${id}`);
+  };
 
   return (
     <Flex gap="middle" align="center" vertical>
@@ -24,7 +31,10 @@ const MovieList = () => {
           {data &&
             data.results.map((movie: IMovieCard) => (
               <Col span={8} key={movie.id}>
-                <MovieCard {...movie} />
+                <MovieCard
+                  {...movie}
+                  onClick={handleGetMoviePage.bind(this, movie.id)}
+                />
               </Col>
             ))}
         </Row>

@@ -1,11 +1,13 @@
-import { Card } from "antd";
 import React from "react";
+import { Card } from "antd";
+
 import { IMovieCard } from "../types/movieCard";
 
-const MovieCard = ({ poster_path, title, overview }: IMovieCard) => {
+const MovieCard = ({ poster_path, title, overview, onClick }: IMovieCard) => {
   return (
     <Card
       hoverable
+      onClick={onClick}
       cover={
         <img
           alt="example"
