@@ -10,6 +10,8 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 
+import SearchPanel from "./SearchPanel";
+
 interface IMovieNavigation {
   label: string;
   key: string;
@@ -56,6 +58,7 @@ const MovieLayout: React.FC<{
       <Layout.Header
         style={{ display: "flex", justifyContent: "space-between" }}
       >
+        <SearchPanel />
         <Menu
           onClick={handleChangeMenuItem}
           theme="dark"
@@ -65,7 +68,7 @@ const MovieLayout: React.FC<{
           style={{ minWidth: 0 }}
         />
       </Layout.Header>
-      <Layout.Content style={{ padding: "0 48px" }}>{children}</Layout.Content>
+      <Layout.Content style={{ padding: "0 7rem" }}>{children}</Layout.Content>
 
       {/* TODO: create footer */}
       <Layout.Footer style={{ textAlign: "center" }}>

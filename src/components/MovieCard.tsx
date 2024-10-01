@@ -1,17 +1,15 @@
-import { Card } from "antd";
 import React from "react";
-import { IMovieCard } from "../types/movieCard";
+import { Card } from "antd";
 
-const MovieCard = ({ poster_path, title, overview }: IMovieCard) => {
+import { IMovieCard } from "../types/movieCard";
+import { baseImageUrl } from "../services/movieApi";
+
+const MovieCard = ({ poster_path, title, overview, onClick }: IMovieCard) => {
   return (
     <Card
       hoverable
-      cover={
-        <img
-          alt="example"
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-        />
-      }
+      onClick={onClick}
+      cover={<img alt="example" src={`${baseImageUrl}${poster_path}`} />}
     >
       <Card.Meta title={title} description={overview} />
     </Card>
